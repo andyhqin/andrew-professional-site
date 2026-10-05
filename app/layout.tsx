@@ -1,12 +1,13 @@
 import '@fontsource-variable/inter';
 import '@fontsource-variable/space-grotesk';
 
-import { Footer, Nav } from '@andyhqin/blocks';
+import { Footer } from '@andyhqin/blocks';
 import type { Viewport } from 'next';
 import type { ReactNode } from 'react';
 
 import { pageMetadata } from '../lib/metadata';
-import { footer, nav } from '../lib/site';
+import { SiteHeader } from '../components/site-header';
+import { footer, nav, social } from '../lib/site';
 import './globals.css';
 
 /** Site-wide defaults; each page sets its own title, description, and path. */
@@ -24,7 +25,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         >
           Skip to content
         </a>
-        <Nav {...nav} />
+        <SiteHeader {...nav} social={social} />
         <main id="main">{children}</main>
         <Footer {...footer} />
       </body>

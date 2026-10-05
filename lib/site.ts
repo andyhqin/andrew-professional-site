@@ -30,7 +30,16 @@ export const person = {
   name: 'Andrew Qin',
   role: 'Software engineer',
   github: 'https://github.com/andyhqin',
+  linkedin: 'https://www.linkedin.com/in/andyhqin',
 };
+
+export type SocialLink = { label: string; href: string; icon: 'github' | 'linkedin' };
+
+/** Profiles elsewhere, shown as icons in the header. */
+export const social: SocialLink[] = [
+  { label: 'GitHub', href: person.github, icon: 'github' },
+  { label: 'LinkedIn', href: person.linkedin, icon: 'linkedin' },
+];
 
 /** Where the contact form lives; the ContactForm block's anchor is fixed as #contact. */
 export const CONTACT_HREF = '/about#contact';
@@ -67,7 +76,13 @@ export const footer = footerBlock.schema.parse({
         { label: 'Contact', href: CONTACT_HREF },
       ],
     },
-    { heading: 'Elsewhere', links: [{ label: 'GitHub', href: person.github }] },
+    {
+      heading: 'Elsewhere',
+      links: [
+        { label: 'GitHub', href: person.github },
+        { label: 'LinkedIn', href: person.linkedin },
+      ],
+    },
   ],
   legal: `© ${new Date().getFullYear()} ${person.name}`,
 });

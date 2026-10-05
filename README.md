@@ -25,7 +25,7 @@ Installing needs a token that can read the private `@andyhqin` packages, read
 by `.npmrc`. With the GitHub CLI, signed in with the `read:packages` scope:
 
 ```sh
-export GITHUB_PACKAGES_TOKEN=$(gh auth token)
+export PACKAGES_TOKEN=$(gh auth token)
 npm install
 cp .env.example .env.local   # optional in development
 npm run dev                  # http://localhost:3000
@@ -51,7 +51,7 @@ instead of sending it.
 
    | Variable | Value |
    |---|---|
-   | `GITHUB_PACKAGES_TOKEN` | A classic GitHub token with only `read:packages` |
+   | `PACKAGES_TOKEN` | A classic GitHub token with only `read:packages` |
    | `SITE_URL` | `https://<name>.netlify.app`, or your domain once you have one |
    | `CONTACT_NOTIFY_TO` | The address that receives contact form messages |
    | `RESEND_API_KEY` | From Resend |
@@ -67,7 +67,8 @@ Resend and set `EMAIL_FROM_ADDRESS` to an address on it.
 ## CI
 
 `.github/workflows/ci.yml` runs typecheck, lint, tests, and a build on every
-push and pull request. It installs the private packages with the workflow's own
-token, so **each `@andyhqin` package must grant this repository read access**:
-in GitHub, open the package, then *Package settings → Manage Actions access →
-Add repository*, and choose this one with the Read role.
+push and pull request. It installs the private packages with the
+**`PACKAGES_TOKEN` repository secret**: a classic GitHub token with only
+`read:packages`, the same kind Netlify uses. Set it with
+`gh secret set PACKAGES_TOKEN`, or in *Settings → Secrets and variables →
+Actions*.

@@ -11,16 +11,15 @@ concurrency:
 
 permissions:
   contents: read
-  # Installs the private @andyhqin packages from GitHub Packages. Each package
-  # must grant this repository read access (package settings, "Manage Actions
-  # access"), or the install is refused.
-  packages: read
 
 jobs:
   verify:
     runs-on: ubuntu-latest
     env:
-      GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # Installs the private @andyhqin packages from GitHub Packages, read by
+      # .npmrc. A repository secret holding a classic token with only
+      # read:packages (secret names can't start with GITHUB_).
+      PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       # Any valid address will do for a build in CI; the real one is set on Netlify.
       SITE_URL: https://andrew-qin.netlify.app
     steps:

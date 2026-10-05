@@ -1,5 +1,5 @@
-import { Footer, Nav } from '@andyhqin/blocks';
-import { render, screen } from '@testing-library/react';
+import { Footer } from '@andyhqin/blocks';
+import { render, screen, within } from '@testing-library/react';
 import axe from 'axe-core';
 import type { ReactNode } from 'react';
 import { describe, expect, it } from 'vitest';
@@ -12,14 +12,15 @@ import NotFound from '../app/not-found';
 import HomePage from '../app/page';
 import ProjectsPage from '../app/projects/page';
 import UsesPage from '../app/uses/page';
+import { SiteHeader } from '../components/site-header';
 import { listPosts } from '../lib/content';
-import { footer, nav } from '../lib/site';
+import { footer, nav, social } from '../lib/site';
 
 /** A page inside the site's chrome, as the layout renders it (without <html>). */
 function renderPage(page: ReactNode) {
   return render(
     <>
-      <Nav {...nav} />
+      <SiteHeader {...nav} social={social} />
       <main id="main">{page}</main>
       <Footer {...footer} />
     </>,
@@ -81,6 +82,15 @@ describe('site chrome', () => {
         ['Bookshelf', '/bookshelf'],
         ['Get in touch', '/about#contact'],
       ]),
+    );
+  });
+
+  it('links GitHub and LinkedIn from the header by name', () => {
+    renderPage(<HomePage />);
+    const header = screen.getByRole('banner');
+    expect(within(header).getByRole('link', { name: 'GitHub' }).getAttribute('href')).toBe('https://github.com/andyhqin');
+    expect(within(header).getByRole('link', { name: 'LinkedIn' }).getAttribute('href')).toBe(
+      'https://www.linkedin.com/in/andyhqin',
     );
   });
 

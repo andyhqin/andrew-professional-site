@@ -21,7 +21,7 @@ jobs:
       # read:packages (secret names can't start with GITHUB_).
       PACKAGES_TOKEN: ${{ secrets.PACKAGES_TOKEN }}
       # Any valid address will do for a build in CI; the real one is set on Netlify.
-      SITE_URL: https://andrew-qin.netlify.app
+      SITE_URL: https://andrewqin.dev
     steps:
       - uses: actions/checkout@v4
 

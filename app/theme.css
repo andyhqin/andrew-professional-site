@@ -1,0 +1,31 @@
+/*
+ * Deep space: this file is the whole brand. Redefining the library's tokens
+ * re-themes every block with no component changes (rung 1 of the library's
+ * escape-hatch ladder).
+ *
+ * The library's tokens are named for a light theme, so on a dark site some
+ * roles flip: the page is dark, "inverted" bands are light, and the brand neon
+ * carries dark text. Every pair the blocks render is checked for WCAG AA
+ * contrast by tests/theme.test.ts; change a colour, run the tests.
+ */
+:root {
+  --color-surface: #070a1a; /* deep space */
+  --color-surface-muted: #0e1330;
+  --color-surface-inverted: #e3e6ff; /* a nebula-lit band */
+
+  --color-ink: #e8ebff; /* starlight */
+  --color-ink-muted: #a7aed6;
+  --color-ink-inverted: #070a1a;
+  --color-line: #263063;
+
+  --color-brand-50: #0a2533; /* dark cyan-tinted panel */
+  --color-brand-100: #4b1fa0; /* violet: eyebrow text on light bands */
+  --color-brand-500: #06b6d4;
+  --color-brand-600: #22d3ee; /* cyan neon: buttons, focus outlines */
+  --color-brand-700: #67e8f9; /* brighter cyan: links, hover */
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Space Grotesk Variable', ui-sans-serif, system-ui, sans-serif;
+
+  color-scheme: dark;
+}

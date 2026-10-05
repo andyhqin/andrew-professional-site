@@ -1,0 +1,52 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+/* The library's tokens, then this site's brand, loaded last so it wins. */
+@import '@andyhqin/tokens/theme.css';
+@import './theme.css';
+
+/* Tailwind must scan the installed library, or blocks render unstyled. */
+@source '../node_modules/@andyhqin/blocks/dist';
+@source '../node_modules/@andyhqin/ui/dist';
+
+body {
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  /*
+   * A still starfield: a few soft points of light over deep space, drawn with
+   * gradients so it costs no image request. Decorative, and never animated.
+   */
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgb(232 235 255 / 0.55), transparent 60%),
+    radial-gradient(1px 1px at 72% 9%, rgb(232 235 255 / 0.45), transparent 60%),
+    radial-gradient(1.5px 1.5px at 38% 64%, rgb(103 232 249 / 0.4), transparent 60%),
+    radial-gradient(1px 1px at 88% 52%, rgb(232 235 255 / 0.4), transparent 60%),
+    radial-gradient(1px 1px at 22% 86%, rgb(232 235 255 / 0.35), transparent 60%),
+    radial-gradient(60rem 40rem at 85% -10%, rgb(75 31 160 / 0.25), transparent 70%),
+    radial-gradient(50rem 30rem at -10% 20%, rgb(34 211 238 / 0.08), transparent 70%),
+    var(--color-surface);
+  background-attachment: fixed;
+}
+
+/* Long-form text (about, uses, blog posts) in the theme's colours. */
+.prose-site {
+  --tw-prose-body: var(--color-ink);
+  --tw-prose-headings: var(--color-ink);
+  --tw-prose-lead: var(--color-ink-muted);
+  --tw-prose-links: var(--color-brand-700);
+  --tw-prose-bold: var(--color-ink);
+  --tw-prose-counters: var(--color-ink-muted);
+  --tw-prose-bullets: var(--color-brand-600);
+  --tw-prose-hr: var(--color-line);
+  --tw-prose-quotes: var(--color-ink);
+  --tw-prose-quote-borders: var(--color-brand-600);
+  --tw-prose-captions: var(--color-ink-muted);
+  --tw-prose-code: var(--color-brand-700);
+  --tw-prose-pre-code: var(--color-ink);
+  --tw-prose-pre-bg: var(--color-surface-muted);
+  --tw-prose-th-borders: var(--color-line);
+  --tw-prose-td-borders: var(--color-line);
+}
+.prose-site :where(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+}

@@ -18,7 +18,7 @@ function siteUrl(): string {
 export const site = siteSeoSchema.parse({
   siteName: 'Andrew Qin',
   siteUrl: siteUrl(),
-  defaultDescription: 'Andrew Qin is a software engineer. Projects, writing, tools, and books.',
+  defaultDescription: 'Andrew Qin is a cloud software engineer. Projects, writing, tools, and books.',
   locale: 'en_US',
   brandColor: '#22d3ee',
 });
@@ -28,7 +28,7 @@ export const allowIndexing = indexingAllowed(process.env);
 
 export const person = {
   name: 'Andrew Qin',
-  role: 'Software engineer',
+  role: 'Cloud software engineer',
   github: 'https://github.com/andyhqin',
   linkedin: 'https://www.linkedin.com/in/andyhqin',
 };

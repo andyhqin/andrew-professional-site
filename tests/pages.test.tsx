@@ -1,5 +1,5 @@
 import { Footer } from '@andyhqin/blocks';
-import { render, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import axe from 'axe-core';
 import type { ReactNode } from 'react';
 import { describe, expect, it } from 'vitest';
@@ -9,6 +9,7 @@ import PostPage from '../app/blog/[slug]/page';
 import BlogPage from '../app/blog/page';
 import BookshelfPage from '../app/bookshelf/page';
 import NotFound from '../app/not-found';
+import LoungePage from '../app/lounge/page';
 import HomePage from '../app/page';
 import ProjectsPage from '../app/projects/page';
 import UsesPage from '../app/uses/page';
@@ -46,6 +47,7 @@ const pages: [string, () => ReactNode | Promise<ReactNode>][] = [
   ['a blog post', () => PostPage({ params: Promise.resolve({ slug: firstPost.slug }) })],
   ['uses', () => <UsesPage />],
   ['bookshelf', () => <BookshelfPage />],
+  ['lounge', () => <LoungePage />],
   ['not found', () => <NotFound />],
 ];
 
@@ -80,6 +82,7 @@ describe('site chrome', () => {
         ['Blog', '/blog'],
         ['Uses', '/uses'],
         ['Bookshelf', '/bookshelf'],
+        ['Lounge', '/lounge'],
         ['Get in touch', '/about#contact'],
       ]),
     );
@@ -97,5 +100,15 @@ describe('site chrome', () => {
   it('puts the contact form at /about#contact, posting to /api/contact', () => {
     const { container } = renderPage(<AboutPage />);
     expect(container.querySelector('#contact form')?.getAttribute('action')).toBe('/api/contact');
+  });
+});
+
+describe('the lounge', () => {
+  it('loads the game only after Play is pressed, in a titled frame', () => {
+    const { container } = renderPage(<LoungePage />);
+    expect(container.querySelector('iframe')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Play' }));
+    const frame = screen.getByTitle('AREA FLAT');
+    expect(frame.getAttribute('src')).toBe('/lounge/area-flat/index.html');
   });
 });

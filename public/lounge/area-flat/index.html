@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>AREA FLAT</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        height: 100%;
+        overflow: hidden;
+        background: #070a1a;
+        color: #e2e8f0;
+        font-family: system-ui, sans-serif;
+      }
+      /*
+        The applet always draws at its declared size, so the stage keeps that
+        size and is scaled to fill the window, centered on it even when the
+        window is smaller than the applet. Pixelated keeps the 1999 art crisp.
+      */
+      #stage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        height: 400px;
+        transform: translate(-50%, -50%);
+      }
+      #stage canvas {
+        image-rendering: pixelated;
+      }
+    </style>
+    <script>
+      /*
+        CheerpJ reads a click's position as its distance from the applet's
+        top-left corner in screen pixels, ignoring the stage's scale, so at 2x
+        only the top-left quarter of the game responds. Catch each mouse
+        event before CheerpJ does (this runs before it loads) and hand it a
+        copy with that distance divided by the scale.
+      */
+      window.stageScale = 1;
+      const pointerProps = ['pointerId', 'pointerType', 'isPrimary', 'width', 'height', 'pressure'];
+      for (const type of ['pointerdown', 'pointermove', 'pointerup', 'pointercancel', 'mousedown', 'mousemove', 'mouseup', 'click', 'dblclick', 'contextmenu']) {
+        addEventListener(
+          type,
+          (event) => {
+            const stage = document.getElementById('stage');
+            if (!event.isTrusted || window.stageScale === 1 || !stage?.contains(event.target)) return;
+            event.stopImmediatePropagation();
+            const box = stage.getBoundingClientRect();
+            const init = {
+              bubbles: event.bubbles,
+              cancelable: event.cancelable,
+              composed: event.composed,
+              view: event.view,
+              detail: event.detail,
+              clientX: box.left + (event.clientX - box.left) / window.stageScale,
+              clientY: box.top + (event.clientY - box.top) / window.stageScale,
+              screenX: event.screenX,
+              screenY: event.screenY,
+              button: event.button,
+              buttons: event.buttons,
+              relatedTarget: event.relatedTarget,
+              ctrlKey: event.ctrlKey,
+              shiftKey: event.shiftKey,
+              altKey: event.altKey,
+              metaKey: event.metaKey,
+            };
+            if (event instanceof PointerEvent) for (const prop of pointerProps) init[prop] = event[prop];
+            const copy = new event.constructor(type, init);
+            event.target.dispatchEvent(copy);
+            if (copy.defaultPrevented) event.preventDefault();
+          },
+          true,
+        );
+      }
+    </script>
+    <!--
+      CheerpJ runs the applet on a Java 8 runtime compiled to WebAssembly.
+      The free Community licence covers personal sites but not self-hosting,
+      so the runtime loads from Leaning Technologies' CDN. Leave cheerpjInit()
+      on its default Java 8: applets do not run on Java 11 or later.
+    -->
+    <script src="https://cjrtnc.leaningtech.com/4.3/loader.js"></script>
+    <script>
+      cheerpjInit();
+    </script>
+  </head>
+  <body>
+    <!--
+      The applet tag from SHIFTUP's original AreaFlat.html, via Flashpoint
+      Archive's copy of shiftup.net/java/AreaFlat/. Keep width and height in
+      step with #stage above and content/lounge.ts.
+    -->
+    <div id="stage">
+      <applet code="AreaFlat.class" archive="AreaFlat201.jar" width="400" height="400">
+        <param name="wait" value="50" />
+        <param name="star" value="50" />
+        <param name="score" value="0" />
+      </applet>
+    </div>
+    <script>
+      const stage = document.getElementById('stage');
+      function fit() {
+        window.stageScale = Math.min(innerWidth / stage.offsetWidth, innerHeight / stage.offsetHeight);
+        stage.style.transform = `translate(-50%, -50%) scale(${window.stageScale})`;
+      }
+      addEventListener('resize', fit);
+      fit();
+    </script>
+  </body>
+</html>

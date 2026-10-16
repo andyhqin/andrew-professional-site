@@ -52,6 +52,7 @@ export const nav = navBlock.schema.parse({
     { label: 'Blog', href: '/blog' },
     { label: 'Uses', href: '/uses' },
     { label: 'Bookshelf', href: '/bookshelf' },
+    { label: 'Lounge', href: '/lounge' },
   ],
   callToAction: { label: 'Get in touch', href: CONTACT_HREF },
 });
@@ -73,6 +74,7 @@ export const footer = footerBlock.schema.parse({
       links: [
         { label: 'Uses', href: '/uses' },
         { label: 'Bookshelf', href: '/bookshelf' },
+        { label: 'Lounge', href: '/lounge' },
         { label: 'Contact', href: CONTACT_HREF },
       ],
     },

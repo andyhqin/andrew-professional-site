@@ -1,5 +1,8 @@
 # andrew-professional-site
 
+[![CI](https://github.com/andyhqin/andrew-professional-site/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/andyhqin/andrew-professional-site/actions/workflows/ci.yml)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/1e0d9c78-55ef-4527-aeef-c2c9addd26ac/deploy-status)](https://app.netlify.com/projects/andrew-professional-site/deploys)
+
 Andrew Qin's professional site: about, projects, blog, uses, and bookshelf.
 
 Built from the `@andyhqin/*` packages published by

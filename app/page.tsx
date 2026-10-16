@@ -13,27 +13,26 @@ export const metadata = pageMetadata({ path: '/' });
 
 const registry = createRegistry(standardBlocks);
 
-// PLACEHOLDER copy in the hero and the feature grid: see CONTENT.md.
 const intro: BlockInstance[] = [
   {
     blockType: hero.name,
     eyebrow: person.role,
     headline: `Hi, I'm ${person.name}.`,
     supportingText:
-      'Placeholder: one or two sentences on what you build and what you care about as an engineer.',
+      'I build full-stack apps and the cloud infrastructure behind them at Intel. Twelve years in, I still love clean, readable code and a good puzzle to solve.',
     primaryAction: { label: 'See my projects', href: '/projects' },
     secondaryAction: { label: 'About me', href: '/about' },
   },
   {
     blockType: featureGrid.name,
     eyebrow: 'What I work on',
-    headline: 'Placeholder: a headline for what you do',
+    headline: 'Full-stack apps, built, tested, and shipped on AWS',
     columns: '3',
     tone: 'muted',
     features: [
-      { title: 'Placeholder', description: 'Something you are good at, in a sentence.' },
-      { title: 'Placeholder', description: 'Something else you are good at.' },
-      { title: 'Placeholder', description: 'Something you are learning or exploring now.' },
+      { title: 'Full-stack development', description: 'React and TypeScript on the frontend, Node.js and Python on the backend, Postgres and MongoDB underneath.' },
+      { title: 'Cloud and delivery', description: 'Serverless on AWS, Terraform, Docker, Kubernetes, and CI/CD pipelines with GitHub Actions.' },
+      { title: 'Taking things apart', description: 'From custom PCs to my homelab, I learn how systems work by opening them up and putting them back together.' },
     ],
   },
 ];
@@ -42,7 +41,7 @@ const outro: BlockInstance[] = [
   {
     blockType: cta.name,
     headline: 'Want to talk?',
-    supportingText: 'About a project, a role, or anything on this site. I read every message.',
+    supportingText: "I'm open to freelance work, collaborations, and the right role. Or just say hi!",
     primaryAction: { label: 'Get in touch', href: CONTACT_HREF },
     tone: 'inverted',
   },
